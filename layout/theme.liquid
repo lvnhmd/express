@@ -1,0 +1,116 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_secondary_background }}">
+
+    {%- if canonical_url != blank -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
+
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {%- endif -%}
+
+    {%- capture seo_title -%}
+      {%- if request.page_type == 'search' and search.performed == true -%}
+        {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+      {%- else -%}
+        {{ page_title }}
+      {%- endif -%}
+      {%- if current_tags -%}
+        {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+      {%- endif -%}
+      {%- if current_page != 1 -%}
+        &ndash; {{ 'general.meta.page' | t: page: current_page }}
+      {%- endif -%}
+      {%- assign escaped_page_title = page_title | escape -%}
+      {%- unless escaped_page_title contains shop.name -%}
+        &ndash; {{ shop.name }}
+      {%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title | strip }}</title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+    {{ content_for_header }}
+
+    {% render 'social-meta-tags' %}
+    {% render 'css-variables' %}
+
+    <style>.header__logo--text{color:var(--color-headings-and-links);font-family:var(--font-heading-family);font-size:calc(var(--font-heading-base-size) * .8);font-style:var(--font-heading-style);font-weight:var(--font-heading-weight);line-height:1.4}@media only screen and (min-width:46.85em){.header__logo--text{font-size:var(--font-heading-base-size)}}p,ul{margin:0 0 2em;color:var(--color-body-text);font-family:var(--font-body-family);font-weight:var(--font-body-weight);font-size:1.6rem;font-style:var(--font-body-style);line-height:2.8rem}@media only screen and (min-width:61.85em){p,ul{font-size:1.7rem;line-height:2.7rem}}p:last-child,ul:last-child{margin-bottom:0}body{font-family:var(--font-body-family);font-weight:var(--font-body-weight);font-size:1.6rem;font-style:var(--font-body-style)}.button,.shopify-challenge__button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;text-align:center;border:1px solid currentColor;border-radius:.25rem;color:var(--color-button);background-color:transparent;padding:1.2em 2.4em;font-style:normal;font-weight:var(--font-body-weight-bold);text-transform:uppercase;white-space:normal;font-size:1.3rem;letter-spacing:.15em}.button[aria-disabled=true],.button[disabled],.shopify-challenge__button[aria-disabled=true],.shopify-challenge__button[disabled]{opacity:.5}.button[aria-disabled=true]:focus,.button[aria-disabled=true]:hover,.button[disabled]:focus,.button[disabled]:hover,.shopify-challenge__button[aria-disabled=true]:focus,.shopify-challenge__button[aria-disabled=true]:hover,.shopify-challenge__button[disabled]:focus,.shopify-challenge__button[disabled]:hover{background-color:transparent;color:var(--color-button)}.button:focus,.button:hover,.shopify-challenge__button:focus,.shopify-challenge__button:hover{background-color:var(--color-button);color:var(--color-background)}.button:active,.shopify-challenge__button:active{background-color:rgba(var(--color-button),.05);color:var(--color-button)}.button--secondary{background-color:var(--color-button);color:var(--color-background)}.button--secondary:hover{color:var(--color-button);background-color:transparent}.button--floating{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;text-transform:uppercase;text-align:center;font-style:normal;font-weight:var(--font-body-weight-bold);background-color:var(--color-background);color:var(--color-button);white-space:normal;font-size:1.3rem;letter-spacing:.15em;border-radius:.25rem;border:none;padding:1.5rem 5.5rem;box-shadow:2px 4px 11px rgba(0,0,0,.1);transition:get-transition-properties(box-shadow)}.button--floating:focus,.button--floating:hover{box-shadow:2px 14px 18px rgba(0,0,0,.1)}.button--small{padding:.6em 1em}.hidden{display:none!important}.critical-hidden{display:inherit}.icon-fallback-text,.label-hidden,.skip-link,.visually-hidden{position:absolute!important;overflow:hidden;width:1px;height:1px;margin:-1px;padding:0;border:0;clip:rect(0 0 0 0);word-wrap:normal!important}.visually-hidden--inline{margin:0;height:1em}.js-focus-hidden:focus{outline:0}.no-placeholder .label-hidden{position:inherit!important;overflow:auto;width:auto;height:auto;margin:0;clip:auto}.visually-shown{position:inherit!important;overflow:auto;width:auto;height:auto;margin:0;clip:auto}.no-js:not(html){display:none}.no-js .no-js:not(html){display:block}.no-js .js{display:none}.supports-no-cookies:not(html){display:none}html.supports-no-cookies .supports-no-cookies:not(html){display:block}html.supports-no-cookies .supports-cookies{display:none}.skip-link:focus{z-index:10000;padding:1em;background-color:var(--color-background);color:var(--color-body-text);margin:0;transition:none;text-decoration:none;position:absolute!important;overflow:auto;width:auto;height:auto;margin:0;clip:auto}.full-width-link{position:absolute;top:0;right:0;bottom:0;left:0;z-index:2}.shopify-challenge__container{padding:6rem 0}.critical-hidden{display:none}.content-for-layout{opacity:0}.content-for-layout .shopify-section{display:none}.content-for-layout .shopify-section:first-child{display:inherit}*,::after,::before{box-sizing:border-box}html{font-size:var(--font-body-base-size)}body{display:flex;flex-direction:column;margin:0}body,html{background-color:var(--color-background);height:100%}body,button,input,select,textarea{-webkit-font-smoothing:antialiased;text-size-adjust:100%}.page-width{max-width:1200px;margin:0 auto;padding:0 6rem}.visually-hidden{position:absolute!important;overflow:hidden;width:1px;height:1px;margin:-1px;padding:0;border:0;clip:rect(0 0 0 0);word-wrap:normal!important}.icon{display:inline-block;vertical-align:middle;fill:currentColor}.header-wrapper{background-color:transparent}.announcement-bar{padding:.7rem;text-align:center}.announcement-bar__message{margin:0;font-size:1.4rem;font-family:var(--font-body-family);font-weight:var(--font-body-weight-bold);word-break:break-all;word-break:break-word;hyphens:auto}.header{display:flex;justify-content:space-between;align-items:center;padding:2.2rem}@media only screen and (min-width:46.85em){.header{padding-left:6rem;padding-right:6rem}}.header--secondary-background{background-color:var(--color-secondary-background)}.header__heading{margin:0;flex-basis:40%;flex-shrink:1}@media only screen and (min-width:46.85em){.header__heading{flex-basis:auto}}.header__logo-image{display:block;width:100%}.header__logo{display:block;vertical-align:middle;text-decoration:none;color:var(--color-headings-and-links)}.header--secondary-background .header__logo{color:var(--color-secondary-background-text)}.header__logo--text{word-break:break-word}.header__icons{display:flex;align-items:center}.header__accounts-link{text-decoration:none;padding:1rem;color:var(--color-headings-and-links)}.header__accounts-link .icon-account{height:2.3rem;width:2.3rem}.header--secondary-background .header__accounts-link{color:var(--color-secondary-background-text)}.header__cart-button{position:relative;padding:1rem;color:var(--color-headings-and-links);border:none;background-color:transparent}.header__cart-button .icon-cart{height:2.4rem;width:2.4rem}.no-js .header__cart-button{display:none}.header--secondary-background .header__cart-button{color:var(--color-secondary-background-text)}.header__cart-button--link{display:none}.header__cart-button--link.header__cart-button--visible,.no-js .header__cart-button--link{display:inline-block}.header__cart-price-bubble{position:relative;padding:.4rem 1rem;background-color:var(--color-headings-and-links);color:var(--color-background);border-radius:.4rem;font-size:1.3rem;font-weight:var(--font-body-weight-bold)}.header__cart-price-bubble::before{content:'';border:3px solid transparent;border-right:6px solid var(--color-headings-and-links);top:50%;transform:translateY(-50%);left:-9px;position:absolute;z-index:2}.header--secondary-background .header__cart-price-bubble{background-color:var(--color-secondary-background-text);color:var(--color-secondary-background)}.header--secondary-background .header__cart-price-bubble::before{border-right-color:var(--color-secondary-background-text)}</style>
+
+    <link rel="stylesheet" href="{{ 'theme.min.css' | asset_url }}" media="print" onload="this.media='all';this.onload=null;">
+    <noscript><link rel="stylesheet" href="{{ 'theme.min.css' | asset_url }}"></noscript>
+    <script>/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */!function(c){"use strict";function e(e,t,n,o){var r,i=c.document,d=i.createElement("link");if(t)r=t;else{var a=(i.body||i.getElementsByTagName("head")[0]).childNodes;r=a[a.length-1]}var f=i.styleSheets;if(o)for(var l in o)o.hasOwnProperty(l)&&d.setAttribute(l,o[l]);d.rel="stylesheet",d.href=e,d.media="only x",function e(t){if(i.body)return t();setTimeout(function(){e(t)})}(function(){r.parentNode.insertBefore(d,t?r:r.nextSibling)});var s=function(e){for(var t=d.href,n=f.length;n--;)if(f[n].href===t)return e();setTimeout(function(){s(e)})};function u(){d.addEventListener&&d.removeEventListener("load",u),d.media=n||"all"}return d.addEventListener&&d.addEventListener("load",u),(d.onloadcssdefined=s)(u),d}"undefined"!=typeof exports?exports.loadCSS=e:c.loadCSS=e}("undefined"!=typeof global?global:this);/*! onloadCSS. (onload callback for loadCSS) [c]2017 Filament Group, Inc. MIT License */function onloadCSS(n,a){var t;function d(){!t&&a&&(t=!0,a.call(n))}n.addEventListener&&n.addEventListener("load",d),n.attachEvent&&n.attachEvent("onload",d),"isApplicationInstalled"in navigator&&"onloadcssdefined"in n&&n.onloadcssdefined(d)}
+
+    var preload = document.querySelector('link[href="{{ 'theme.min.css' | asset_url }}"]');
+    var stylesheet = loadCSS("{{ 'theme.min.css' | asset_url }}", preload);
+    onloadCSS(stylesheet, function() { stylesheet.loaded = true; });
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+    {%- if page.request_type != 'cart' and settings.show_cart_drawer -%}
+      {% render 'cart-drawer' %}
+    {%- endif -%}
+
+    {%- if request.page_type == 'index' -%}
+      {% render 'product-modal' %}
+    {%- endif -%}
+
+    {% section 'header' %}
+
+    <main id="MainContent" class="content-for-layout" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+      <li id="a11y-selection-message">{{ 'general.accessibility.selection_help' | t }}</li>
+    </ul>
+
+    <script>
+      window.theme = {
+        rootUrl: "{{ routes.root_url }}",
+        stylesheet: "{{ 'theme.min.css' | asset_url }}",
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          cartError: {{ 'cart.general.cart_error' | t | json }},
+          external: {{ 'general.accessibility.link_messages.external' | t | json }},
+          newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
+          newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }},
+          quantityError: {{ 'cart.general.cart_quantity_error_html' | t: quantity: "[quantity]", title: "[title]" | json }},
+          quantityMinimumMessage: {{ 'products.product.quantity_minimum_message' | t | json }},
+          regularPrice: {{ 'products.product.regular_price' | t | json }},
+          salePrice: {{ 'products.product.sale_price' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }},
+          unitPrice: {{ 'products.product.unit_price_label' | t | json }},
+          unitPriceSeparator: {{ 'general.accessibility.unit_price_separator' | t | json }},
+          subtotal: {{ 'cart.general.subtotal' | t | json }},
+          mediaCarousel: {{ 'products.slider.media_carousel' | t | json }}
+        },
+        moneyFormat: {{ shop.money_format | json }},
+        moneyFormatWithCurrency: {{ shop.money_with_currency_format | json }}
+      };
+    </script>
+    <script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
+
+    {%- if request.page_type contains 'customers/' -%}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
+  </body>
+</html>
