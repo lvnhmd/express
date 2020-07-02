@@ -135,8 +135,8 @@
       "page_title": "Your Cart",
       "remove": "Remove",
       "remove_title": "Remove {{ title }}",
-      "note": "Special instructions for seller",
-      "subtotal": "Subtotal",
+      "note": "Tell Alex what you think he should know",
+      "subtotal": "Total",
       "shipping_at_checkout": "Shipping & taxes calculated at checkout",
       "update": "Update Cart",
       "checkout": "Check Out",
@@ -151,7 +151,7 @@
       "cart_quantity_error_html": "You can only add {{ quantity }} <strong>{{ title }}<\/strong> to your cart.",
       "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout",
       "taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping<\/a> calculated at checkout",
-      "taxes_included_but_shipping_at_checkout": "Tax included and shipping calculated at checkout",
+      "taxes_included_but_shipping_at_checkout": "",
       "taxes_included_and_shipping_policy_html": "Tax included. <a href=\"{{ link }}\">Shipping<\/a> calculated at checkout."
     },
     "label": {
@@ -318,12 +318,12 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "Add to Cart",
+      "add_to_cart": "Order now ",
       "collection": "Collection",
       "decrease_quantity": "Decrease quantity of {{ title }} by one",
       "from_text_html": "From {{ price }}",
       "increase_quantity": "Increase quantity of {{ title }} by one",
-      "include_taxes": "Tax included.",
+      "include_taxes": "",
       "on_sale": "Sale",
       "on_sale_from_html": "On Sale from {{ price }}",
       "product_quantity": "Product quantity",

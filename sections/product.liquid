@@ -129,10 +129,10 @@
 
   <div class="product__content product__content--template product__content--information">
     <div class="product__sticky">
-      <p class="product__collection product__collection--desktop">
+      <!-- <p class="product__collection product__collection--desktop">
         <span class="visually-hidden">{{ 'products.product.collection' | t }}:</span>
         <span data-product-collection-title></span>
-      </p>
+      </p> -->
 
       <h1 id="ProductHeading" class="product__title product__title--template">{{ product.title | escape }}</h1>
       <h2 id="ProductHeadingModal" class="product__title product__title--template product__title--modal">{{ product.title | escape }}</h2>
@@ -150,17 +150,36 @@
         </div>
       {%- endif -%}
 
-      {% render 'product-form', product: product, current_variant: current_variant %}
 
+
+      <div class="col-sm-8">
+        <!-- <p class="text-center text-muted small well well-sm  ng-scope">Key: <span class="label label-warning">May
+            Contain</span> <span class="label label-danger">Contains</span></p> -->
+        <ul class="eicon-list ng-scope">
+          {% for tag in product.tags %}
+            {%- if tag == 'vegetarian' -%}
+              <li class="suitable-level-yes"><span class=" eicon eicon-circle-{{ tag }}"></span>{{ tag }}</li>
+            {%- else -%}
+              <li class="allergen-level-yes"><span class=" eicon eicon-circle-{{ tag }}"></span>{{ tag }}</li>
+            {%- endif -%}
+          {% endfor %}
+        </ul>
+      </div>
+
+      
       {%- if product.description != blank -%}
         <div class="product__description rte">
           {{ product.description }}
+          <!-- what if I tag products with allergens and if the product is tagged show icon-->
+          <!-- first show the icons -->
         </div>
       {%- endif -%}
 
-      {%- if section.settings.show_social_buttons -%}
+      {% render 'product-form', product: product, current_variant: current_variant %}
+
+      <!-- {%- if section.settings.show_social_buttons -%}
         {% render 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
-      {%- endif -%}
+      {%- endif -%} -->
     </div>
   </div>
 </div>
